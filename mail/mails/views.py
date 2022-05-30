@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializer import UsersSerializer
 from .models import Users
+from mails import serializer
 # Create your views here.
 
 
@@ -21,3 +22,20 @@ def userregistered(request):
         
     return Response(serializer.data)
 
+@api_view(['POST'])
+def checkUser(request):
+    x=request.data["name"]
+    user=Users.objects.get(name=x)
+    serializer=UsersSerializer(user)
+    if (serializer.data["password"]!=request.data["password"]):
+        return Response({"status":False})
+    else:
+        return Response({"status":True,"id":serializer.data["id"]})
+
+@api_view(['POST'])
+def findName(request):
+    print(request.data)
+    user=Users.objects.get(id=request.data["x"])
+    serializer=UsersSerializer(user)
+    print(serializer.data)
+    return Response({"name":"yo"})

@@ -19,23 +19,12 @@ const Register = () => {
                 password:password.current.value
             }
             
-            // let headersList = {
-            //     "Accept": "*/*",
-            //     // "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-            //     "Content-Type": "application/json"
-            //    }
-            // fetch("http://127.0.0.1:8000/api/register/",{
-            //     method:"POST",
-            //     headers:headersList,
-            //     body:JSON.stringify(data)
-            // })
-
             let response=await POST('register/',data)
-            
             console.log(response)
-            
-
-            
+            username.current.value=""
+            password.current.value=""
+            confirmPassword.current.value=""
+            window.location.href='/'
         }
 
     }

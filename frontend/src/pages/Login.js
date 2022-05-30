@@ -1,13 +1,28 @@
 import React from 'react'
 import { useRef } from 'react'
-import axios from 'axios'
+import { POST } from './utility/fetch'
+
 
 const Login = () => {
     const username = useRef()
     const password = useRef()
 
-    const handleLogin = () => {
-      
+    const handleLogin = async () => {
+      let data={
+        name:username.current.value,
+        password:password.current.value
+    }
+      let response=await POST('login/',data)
+      console.log(response)
+      if (response["status"]){
+        console.log("You have successfully logged in")
+      }
+      else{
+        console.log("Login failed")
+      }
+      console.log(response)
+      localStorage.setItem("id",response["id"])
+      window.location.href='/inbox'
     }
 
 
