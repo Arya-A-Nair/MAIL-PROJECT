@@ -29,7 +29,7 @@ const Compose = () => {
     <div>
         <Header name={name} />
         <h1>Compose</h1>
-        <ComposeForm /> 
+        <ComposeForm name={name}/> 
     </div>
   )
 }

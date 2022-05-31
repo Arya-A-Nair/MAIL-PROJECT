@@ -1,6 +1,7 @@
 import React from 'react'
 
 const mailCardSent = ({mail}) => {
+    
     let timestamp= new Date(mail.timestamp)
     let date=timestamp.toUTCString()
     return (

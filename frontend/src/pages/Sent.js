@@ -22,7 +22,8 @@ const Sent = () => {
             "sender":name
         }
         let response=await POST('sent/',data)
-        setMails(response)      
+        let responsereverse=response.reverse()
+        setMails(responsereverse)    
     }
 
 

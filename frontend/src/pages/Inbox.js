@@ -22,7 +22,9 @@ const Inbox = () => {
             "recipient":name
         }
         let response=await POST('inbox/',data)
-        setMails(response)      
+        let responsereverse=response.reverse()
+        
+        setMails(responsereverse)      
     }
 
 
