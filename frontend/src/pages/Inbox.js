@@ -1,33 +1,31 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { POST } from './utility/fetch'
 
 
 const Inbox = () => {
-    const [id,setId]=useState(0)
+    let id=localStorage.getItem('id')
     const [name,setName]=useState("")
-    let getUser=()=>{
-        let x=localStorage.getItem('id')
-        console.log(x)
-        setId(x)
-    }
-
-    let getName= async ()=>{
+    
+    let getName=async ()=>{
         let data={
-            x:id
+            "id":id
         }
         let response=await POST('find/',data)
-        console.log(response)
+        setName(response['name'])
     }
+
     useEffect(()=>{
-        getUser()
         getName()
     },[])
+    
+    
+
 
     return (
     <div>
         <h1>Inbox</h1>
-        <p>{id}</p>
+        <p>{name}</p>
     </div>
     )
 }

@@ -34,8 +34,6 @@ def checkUser(request):
 
 @api_view(['POST'])
 def findName(request):
-    print(request.data)
-    user=Users.objects.get(id=request.data["x"])
+    user=Users.objects.get(id=request.data["id"])
     serializer=UsersSerializer(user)
-    print(serializer.data)
-    return Response({"name":"yo"})
+    return Response({"name":serializer.data["name"]})
