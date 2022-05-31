@@ -1,15 +1,15 @@
 import React from 'react'
-import { useEffect, useState, useRef } from 'react'
-import { POST } from './utility/fetch'
 import Header from './components/Header'
-import MailCard from './components/mailCardInbox'
+import {useEffect,useState} from 'react'
+import {POST} from './utility/fetch'
+import ComposeForm from './components/ComposeForm'
 
 
 let name=""
-const Inbox = () => {
+const Compose = () => {
     let id=localStorage.getItem('id')
     const [mails,setMails]=useState([])
-    
+
 
     let getMails=async ()=>{
         let data1={
@@ -17,12 +17,7 @@ const Inbox = () => {
         }
         let response1=await POST('find/',data1)
         name=response1['name']
-
-        let data={
-            "recipient":name
-        }
-        let response=await POST('inbox/',data)
-        setMails(response)      
+        setMails()      
     }
 
 
@@ -30,13 +25,13 @@ const Inbox = () => {
         getMails()
     },[])
     
-    return (
+  return (
     <div>
         <Header name={name} />
-        <h1>Inbox</h1>
-        {mails.map(mail=><MailCard mail={mail} key={mail.id}/>)}
+        <h1>Compose</h1>
+        <ComposeForm /> 
     </div>
-    )
+  )
 }
 
-export default Inbox
+export default Compose

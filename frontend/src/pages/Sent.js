@@ -1,12 +1,12 @@
 import React from 'react'
-import { useEffect, useState, useRef } from 'react'
-import { POST } from './utility/fetch'
 import Header from './components/Header'
-import MailCard from './components/mailCardInbox'
+import {useEffect, useState} from 'react'
+import {POST} from './utility/fetch'
+import MailCardSent from './components/mailCardSent'
 
 
 let name=""
-const Inbox = () => {
+const Sent = () => {
     let id=localStorage.getItem('id')
     const [mails,setMails]=useState([])
     
@@ -19,9 +19,9 @@ const Inbox = () => {
         name=response1['name']
 
         let data={
-            "recipient":name
+            "sender":name
         }
-        let response=await POST('inbox/',data)
+        let response=await POST('sent/',data)
         setMails(response)      
     }
 
@@ -29,14 +29,13 @@ const Inbox = () => {
     useEffect(()=>{
         getMails()
     },[])
-    
     return (
-    <div>
-        <Header name={name} />
-        <h1>Inbox</h1>
-        {mails.map(mail=><MailCard mail={mail} key={mail.id}/>)}
-    </div>
+        <div>
+            <Header name={name} />
+            <h1>Sent</h1>
+            {mails.map(mail=><MailCardSent mail={mail} key={mail.id}/>)}
+        </div>
     )
 }
 
-export default Inbox
+export default Sent
