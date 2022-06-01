@@ -1,8 +1,9 @@
+from re import X
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializer import UsersSerializer
-from .models import Users
+from .serializer import UsersSerializer , MailSerializer
+from .models import Users,mail
 from mails import serializer
 # Create your views here.
 
@@ -16,7 +17,6 @@ def index(request):
 @api_view(['POST'])
 def userregistered(request):
     serializer=UsersSerializer(data=request.data)
-    print(request.data)
     if serializer.is_valid():
         serializer.save()
         
@@ -37,3 +37,29 @@ def findName(request):
     user=Users.objects.get(id=request.data["id"])
     serializer=UsersSerializer(user)
     return Response({"name":serializer.data["name"]})
+
+@api_view(['POST'])
+def inbox(request):
+    mails= mail.objects.filter(recipient=request.data["recipient"],archived=False)
+    serializer=MailSerializer(mails,many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def sent(request):
+    mails= mail.objects.filter(sender=request.data["sender"])
+    serializer=MailSerializer(mails,many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def compose(request):
+    serializer=MailSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response({"status":True})
+
+@api_view(['POST'])
+def archive(request):
+    mails= mail.objects.filter(recipient=request.data["recipient"],archived=True)
+    serializer=MailSerializer(mails,many=True)
+    return Response(serializer.data)
+
