@@ -63,3 +63,10 @@ def archive(request):
     serializer=MailSerializer(mails,many=True)
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+def emailDetailview(request):
+    mails= mail.objects.filter(id=request.data["id"],recipient=request.data["recipient"])
+    serializer=MailSerializer(mails,many=True)
+    return Response(serializer.data)
+

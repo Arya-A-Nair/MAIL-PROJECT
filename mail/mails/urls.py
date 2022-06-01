@@ -10,4 +10,5 @@ urlpatterns = [
     path('sent/',views.sent),
     path('compose/',views.compose),
     path('archive/',views.archive),
+    path('emailDetailview/',views.emailDetailview),
 ]
