@@ -18,7 +18,7 @@ const DetailView = () => {
             "recipient":name,
             "archived":true
         }
-        let response=await POST('emailArchive/',data)
+        await POST('emailArchive/',data)
         window.location.href='/archived'
     }
     let HandleUnArchive=async ()=>{
@@ -43,14 +43,21 @@ const DetailView = () => {
         console.log(response1)
         
     }
-    
+    let HandleReply=async ()=>{
+        localStorage.setItem("recipient",mail.sender)
+        localStorage.setItem("subject",mail.subject)
+        localStorage.setItem("body",mail.body)
+        localStorage.setItem("time",date)
+        localStorage.setItem("sender",name)
+        window.location.href='/reply'
+    }
     useEffect(()=>{
         getMail()
     },[])
   return (
     <div>
         <Header name={name}/>
-        <div class="mail">
+        <div className="mail">
             <h1>{mail.subject}</h1>
             <p><b>From</b>: {mail.sender} <b>on</b> {date}</p>
             <p><b>To:</b> {mail.recipient}</p>
@@ -60,7 +67,7 @@ const DetailView = () => {
             <span>
             {mail.archived===false?<button className='button' onClick={()=>HandleArchive()}>Archive</button>:<button className='button' onClick={()=>HandleUnArchive()}>Unarchive</button>}
                 
-                <button className='button'>Reply</button>
+                <button className='button' onClick={()=>HandleReply()}>Reply</button>
             </span>
         </div>
     </div>

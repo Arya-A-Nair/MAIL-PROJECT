@@ -7,6 +7,7 @@ import Sent from './pages/Sent';
 import Compose from './pages/Compose';
 import Archived from './pages/Archived';
 import DetailView from './pages/DetailView';
+import ComposeReply from './pages/ComposeReply';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='compose/' element={<Compose/>}/>
           <Route path='archived/' element={<Archived/>}/>
           <Route path='detail/' element={<DetailView/>}/>
+          <Route path='reply/' element={<ComposeReply/>}/>
         </Routes>
       </BrowserRouter>
     </div>
