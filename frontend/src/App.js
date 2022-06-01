@@ -6,6 +6,7 @@ import Inbox from './pages/Inbox'
 import Sent from './pages/Sent';
 import Compose from './pages/Compose';
 import Archived from './pages/Archived';
+import DetailView from './pages/DetailView';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='/sent' element={<Sent/>}/>
           <Route path='compose/' element={<Compose/>}/>
           <Route path='archived/' element={<Archived/>}/>
+          <Route path='detail/' element={<DetailView/>}/>
         </Routes>
       </BrowserRouter>
     </div>

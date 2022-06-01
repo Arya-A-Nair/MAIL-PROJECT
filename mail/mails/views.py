@@ -8,12 +8,6 @@ from mails import serializer
 # Create your views here.
 
 
-@api_view(['GET'])
-def index(request):
-    mails=Users.objects.all()
-    serializer=UsersSerializer(mails,many=True)
-    return Response(serializer.data)
-
 @api_view(['POST'])
 def userregistered(request):
     serializer=UsersSerializer(data=request.data)
@@ -67,6 +61,25 @@ def archive(request):
 @api_view(['POST'])
 def emailDetailview(request):
     mails= mail.objects.filter(id=request.data["id"],recipient=request.data["recipient"])
-    serializer=MailSerializer(mails,many=True)
+    serializer=MailSerializer(mails,many=True)  
     return Response(serializer.data)
+
+@api_view(['POST'])
+def emailRead(request):
+    mails=mail.objects.get(id=request.data["id"])
+    data1={
+        "id":mails.id,
+        "sender":mails.sender,
+        "recipient":mails.recipient,
+        "subject":mails.subject,
+        "body":mails.body,
+        "archived":mails.archived,
+        "read":True
+    }
+    serializer=MailSerializer(instance=mails,data=data1)
+    if serializer.is_valid():
+        serializer.save()
+    return Response({"status":True})
+
+    
 
