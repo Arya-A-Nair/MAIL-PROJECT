@@ -11,4 +11,5 @@ urlpatterns = [
     path('archive/',views.archive),
     path('emailDetailview/',views.emailDetailview),
     path('emailRead/',views.emailRead),
+    path('emailArchive/',views.emailArchive)
 ]

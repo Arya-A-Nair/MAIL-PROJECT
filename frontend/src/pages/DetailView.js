@@ -12,7 +12,24 @@ const DetailView = () => {
     let timestamp= new Date(mail.timestamp)
     let date=timestamp.toUTCString()
     
-    console.log(key,name)
+    let HandleArchive=async ()=>{
+        let data={
+            "id":key,
+            "recipient":name,
+            "archived":true
+        }
+        let response=await POST('emailArchive/',data)
+        window.location.href='/archived'
+    }
+    let HandleUnArchive=async ()=>{
+        let data={
+            "id":key,
+            "recipient":name,
+            "archived":false
+        }
+        let response=await POST('emailArchive/',data)
+        window.location.href='/inbox'
+    }
 
     let getMail=async ()=>{
         let data={
@@ -39,9 +56,12 @@ const DetailView = () => {
             <p><b>To:</b> {mail.recipient}</p>
             <br/>
             <p className='content'>{mail.body}</p>
-            
 
-
+            <span>
+            {mail.archived===false?<button className='button' onClick={()=>HandleArchive()}>Archive</button>:<button className='button' onClick={()=>HandleUnArchive()}>Unarchive</button>}
+                
+                <button className='button'>Reply</button>
+            </span>
         </div>
     </div>
 

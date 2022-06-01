@@ -81,5 +81,24 @@ def emailRead(request):
         serializer.save()
     return Response({"status":True})
 
+
+@api_view(['POST'])
+def emailArchive(request):
+    mails=mail.objects.get(id=request.data["id"])
+    
+    data1={
+        "id":mails.id,
+        "sender":mails.sender,
+        "recipient":mails.recipient,
+        "subject":mails.subject,
+        "body":mails.body,
+        "archived":request.data["archived"],
+        "read":mails.read
+    }
+    serializer=MailSerializer(instance=mails,data=data1)
+    if serializer.is_valid():
+        serializer.save()
+    return Response({"status":True})
+
     
 
