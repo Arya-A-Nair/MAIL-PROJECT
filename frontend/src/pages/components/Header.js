@@ -24,12 +24,11 @@ const Header = ({name}) => {
     <div>
         <h1>{name}</h1>
         <span>
-        <button onClick={()=>inboxRedirect()}>Inbox</button>
-        <button onClick={()=>composeRedirect()}>Compose</button>
-        <button onClick={()=>sentRedirect()}>Sent</button>
-        <button onClick={()=>archivedRedirect()}>Archived</button>
-        <button onClick={()=>handleLogout()}>Log Out</button>
-
+        <button className='button-85' onClick={()=>inboxRedirect()}>Inbox</button>
+        <button className='button-85' onClick={()=>composeRedirect()}>Compose</button>
+        <button className='button-85' onClick={()=>sentRedirect()}>Sent</button>
+        <button className='button-85' onClick={()=>archivedRedirect()}>Archived</button>
+        <button className='button-85' onClick={()=>handleLogout()}>Log Out</button>
         </span>
     </div>
   )

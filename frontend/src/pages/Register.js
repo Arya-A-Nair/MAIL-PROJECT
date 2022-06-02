@@ -7,7 +7,7 @@ const Register = () => {
     const password = useRef()
     const confirmPassword = useRef()
 
-    const handleRegister=async ()=>{
+    const handleRegister=async (e)=>{
         if (password.current.value!==confirmPassword.current.value){
             alert('Passwords do not match')
             password.current.value=""
@@ -31,14 +31,21 @@ const Register = () => {
 
 
     return (
-        <div>
+        <form onSubmit={handleRegister()}>
             <h1>Register</h1>
-            <input type='text' placeholder='Username' ref={username}/>
-            <input type='password' placeholder='Password' ref={password} />
-            <input type='password' placeholder='Confirm Password' ref={confirmPassword} />
-            <button onClick={()=>handleRegister()}>Register</button>  
+            <div className='form'>
+                <label>Username:</label>
+                <input type='text'  placeholder='Username' ref={username} required/>
+
+                <label>Password:</label>
+                <input type='password'  placeholder='Password' ref={password} required/>
+
+                <label>Confirm Password:</label>
+                <input type='password'  placeholder='Confirm Password' ref={confirmPassword} required />
+            </div>
+            <button className='button-3' type='submit'>Register</button>  
             <h4>If you already have an account <a href="/">Login</a></h4>
-        </div>
+        </form>
     )
 }
 

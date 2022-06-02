@@ -59,7 +59,7 @@ const DetailView = () => {
     
         return (
             <div>
-                <Header name={name}/>
+                <Header name={mail.sender}/>
                 <div className="mail">
                     <h1>{mail.subject}</h1>
                     <p><b>From</b>: {mail.sender} <b>on</b> {date}</p>
@@ -67,10 +67,7 @@ const DetailView = () => {
                     <br/>
                     <p className='content'>{mail.body}</p>
         
-                    <span>
-                    {mail.archived===false?<button className='button-archive' onClick={()=>HandleArchive()}>Archive</button>:<button className='button-archive' onClick={()=>HandleUnArchive()}>Unarchive</button>} 
-                    
-                        
+                    <span>          
                         <button className='button-3' onClick={()=>HandleReply()}>Reply</button>
                     </span>
                 </div>

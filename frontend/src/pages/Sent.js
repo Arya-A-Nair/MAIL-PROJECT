@@ -34,7 +34,9 @@ const Sent = () => {
         <div>
             <Header name={name} />
             <h1>Sent</h1>
-            {mails.map(mail=><MailCardSent mail={mail} key={mail.id}/>)}
+            <div className="mail-container">
+                {mails.map(mail=><MailCardSent mail={mail} key={mail.id}/>)}
+            </div>
         </div>
     )
 }

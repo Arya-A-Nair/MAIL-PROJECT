@@ -36,7 +36,9 @@ const Inbox = () => {
     <div>
         <Header name={name} />
         <h1>Inbox</h1>
-        {mails.map(mail=><MailCard mail={mail} key={mail.id}/>)}
+        <div className="mail-container">
+            {mails.map(mail=><MailCard mail={mail} key={mail.id}/>)}
+        </div>
     </div>
     )
 }

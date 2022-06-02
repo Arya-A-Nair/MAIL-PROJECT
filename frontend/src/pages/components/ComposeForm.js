@@ -32,8 +32,8 @@ const ComposeForm = ({name}) => {
 
 
   return (
-    <div className='form'>
-        
+    <div >
+        <div className='form'>
             <label>To:</label>
             <input type="text" name="to" ref={to}/>
         
@@ -43,10 +43,11 @@ const ComposeForm = ({name}) => {
 
             <label>Body</label>
             <textarea name="body" ref={body}/>
+        </div>
 
         
             
-            <button type="submit" onClick={()=>handleSubmit()}>Send</button>
+            <button type="submit" className='button-3' onClick={()=>handleSubmit()}>Send</button>
             
         
     </div>
