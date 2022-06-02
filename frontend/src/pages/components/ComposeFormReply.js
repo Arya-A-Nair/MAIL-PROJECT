@@ -13,7 +13,7 @@ const ComposeFormReply = () => {
         subject='Re: '+subject
     }
 
-    const [body,setBody]=useState(intro+localStorage.getItem('body')+"\n")
+    const [body,setBody]=useState(intro+localStorage.getItem('body')+"\n\n")
     
     
 
@@ -50,7 +50,7 @@ const ComposeFormReply = () => {
 
         
             
-            <button type="submit" onClick={()=>handleSubmit()}>Send</button>
+            <button type="submit" onClick={()=>handleSubmit()} className="button-3  ">Send</button>
             
     
         </div>  

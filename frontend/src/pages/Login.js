@@ -16,13 +16,16 @@ const Login = () => {
       console.log(response)
       if (response["status"]){
         console.log("You have successfully logged in")
+        console.log(response)
+        localStorage.setItem("id",response["id"])
+        window.location.href='/inbox'
       }
       else{
-        console.log("Login failed")
+        alert("Login failed")
+        username.current.value=""
+        password.current.value=""
       }
-      console.log(response)
-      localStorage.setItem("id",response["id"])
-      window.location.href='/inbox'
+      
     }
 
 
@@ -32,13 +35,13 @@ const Login = () => {
       <h1>Login</h1>
       <div className='form'>
         <label>Username:</label>
-        <input type='text' placeholder='Username' ref={username} />
+        <input type='text' placeholder='Username' ref={username} required/>
 
         <label>Password:</label>
-        <input type='password' placeholder='Password' ref={password}/>
+        <input type='password' placeholder='Password' ref={password} required/>
       </div>
-      
-      <button className='button-3' onClick={()=>handleLogin()}>Login</button>
+
+      <button className='button-3' type='submit'onClick={()=>handleLogin()}>Login</button>
 
       <h4>If you are new please <a href="/Register">Register</a></h4>
     </div>
