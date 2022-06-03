@@ -1,4 +1,5 @@
 from re import X
+from tabnanny import check
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -10,11 +11,15 @@ from mails import serializer
 
 @api_view(['POST'])
 def userregistered(request):
-    serializer=UsersSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        
-    return Response(serializer.data)
+    check=Users.objects.filter(name=request.data['name']).exists()
+    if check==True:
+        return Response({"message":"User already exists","status":False})
+    else:
+        serializer=UsersSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            
+        return Response({'message':'User registered successfully','status':True})
 
 @api_view(['POST'])
 def checkUser(request):

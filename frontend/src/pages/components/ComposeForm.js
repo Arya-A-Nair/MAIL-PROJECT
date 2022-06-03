@@ -36,7 +36,7 @@ const ComposeForm = ({name}) => {
         <div className='form'>
             <label>To:</label>
             {/* <input type="text" name="to" ref={to}/> */}
-            <span class="Username">
+            <span className="Username">
                     <input type='text' style={{'width':'30%'}} ref={to} required/>
                     <label>@awesome.com</label>
             </span>

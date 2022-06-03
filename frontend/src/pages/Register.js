@@ -8,9 +8,11 @@ const Register = () => {
     const confirmPassword = useRef()
 
     const handleRegister=async ()=>{
-        if (password.current.value!=="" && confirmPassword.current.value!=="" &&username.current.value!==""){
-
-            if (password.current.value!==confirmPassword.current.value){
+        if (password.current.value!=="" && confirmPassword.current.value!=="" &&username.current.value!=="" ){
+            if (password.current.value.length<6){
+                alert("Password must be at least 6 characters long")
+            }
+            else if (password.current.value!==confirmPassword.current.value){
                 alert('Passwords do not match')
                 password.current.value=""
                 confirmPassword.current.value=""
@@ -23,13 +25,25 @@ const Register = () => {
                 }
                 
                 let response=await POST('register/',data)
-                console.log(response)
-                username.current.value=""
-                password.current.value=""
-                confirmPassword.current.value=""
-                window.location.href='/'
+
+                if (response["status"]===true){
+                    username.current.value=""
+                    password.current.value=""
+                    confirmPassword.current.value=""
+                    alert(response["message"])
+                    window.location.href='/'
+                }
+                else{
+                    console.log(response)
+                    username.current.value=""
+                    password.current.value=""
+                    confirmPassword.current.value=""
+                    alert(response["message"])
+                }
+
             }
         }
+
         else{
             alert('Please fill all fields')
         }
@@ -42,13 +56,13 @@ const Register = () => {
             <h1>Register</h1>
             <div className='form'>
                 <label>Username:</label>
-                <span class="Username">
+                <span className="Username">
                     <input type='text'  placeholder='Username' style={{'width':'30%'}} ref={username} required/>
                     <label>@awesome.com</label>
                 </span>
 
                 <label>Password:</label>
-                <input type='password' pattern=".{8,}"  placeholder='Password' ref={password} required/>
+                <input type='password' pattern=".{8,}"  placeholder='Password(more than 6 characters)' ref={password} required/>
 
                 <label>Confirm Password:</label>
                 <input type='password'  placeholder='Confirm Password' ref={confirmPassword} required />

@@ -41,7 +41,7 @@ const Login = () => {
       <h1>Login</h1>
       <div className='form'>
         <label>Username:</label>
-        <span class="Username">
+        <span className="Username">
                     <input type='text'  placeholder='Username' style={{'width':'30%'}} ref={username} required/>
                     <label>@awesome.com</label>
         </span>
