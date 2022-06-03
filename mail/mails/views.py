@@ -24,12 +24,16 @@ def userregistered(request):
 @api_view(['POST'])
 def checkUser(request):
     x=request.data["name"]
-    user=Users.objects.get(name=x)
-    serializer=UsersSerializer(user)
-    if (serializer.data["password"]!=request.data["password"]):
-        return Response({"status":False})
+    check=Users.objects.filter(name=x).exists()
+    if check==True:
+        user=Users.objects.get(name=x)
+        serializer=UsersSerializer(user)
+        if (serializer.data["password"]!=request.data["password"]):
+            return Response({"status":False,"message":"Incorrect Password"})
+        else:
+            return Response({"status":True,"id":serializer.data["id"]})
     else:
-        return Response({"status":True,"id":serializer.data["id"]})
+        return Response({"status":False,"message":"User does not exist"})
 
 @api_view(['POST'])
 def findName(request):

@@ -22,10 +22,8 @@ const Login = () => {
             localStorage.setItem("id",response["id"])
             window.location.href='/inbox'
           }
-          else{
-            alert("Login failed")
-            username.current.value=""
-            password.current.value=""
+          else if (response["status"]===false){
+            alert(response["message"])
           }
         }
         else{
