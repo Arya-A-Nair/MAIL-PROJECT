@@ -8,23 +8,29 @@ const Login = () => {
     const password = useRef()
 
     const handleLogin = async () => {
-      let data={
-        name:username.current.value,
-        password:password.current.value
-    }
-      let response=await POST('login/',data)
-      console.log(response)
-      if (response["status"]){
-        console.log("You have successfully logged in")
-        console.log(response)
-        localStorage.setItem("id",response["id"])
-        window.location.href='/inbox'
-      }
-      else{
-        alert("Login failed")
-        username.current.value=""
-        password.current.value=""
-      }
+        if (username.current.value !== "" && password.current.value !== "") {
+          let name=username.current.value+"@awesome.com"
+          let data={
+            name:name,
+            password:password.current.value
+        }
+          let response=await POST('login/',data)
+          console.log(response)
+          if (response["status"]){
+            console.log("You have successfully logged in")
+            console.log(response)
+            localStorage.setItem("id",response["id"])
+            window.location.href='/inbox'
+          }
+          else{
+            alert("Login failed")
+            username.current.value=""
+            password.current.value=""
+          }
+        }
+        else{
+          alert("Please fill all fields")
+        }
       
     }
 
@@ -35,7 +41,10 @@ const Login = () => {
       <h1>Login</h1>
       <div className='form'>
         <label>Username:</label>
-        <input type='text' placeholder='Username' ref={username} required/>
+        <span class="Username">
+                    <input type='text'  placeholder='Username' style={{'width':'30%'}} ref={username} required/>
+                    <label>@awesome.com</label>
+        </span>
 
         <label>Password:</label>
         <input type='password' placeholder='Password' ref={password} required/>

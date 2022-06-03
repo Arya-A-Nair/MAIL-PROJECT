@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef ,useState} from 'react'
+import {useState} from 'react'
 import { POST } from '../utility/fetch'
 
 const ComposeFormReply = () => {
@@ -50,10 +50,10 @@ const ComposeFormReply = () => {
 
         
             
+        </div>  
             <button type="submit" onClick={()=>handleSubmit()} className="button-3  ">Send</button>
             
     
-        </div>  
     </div>
   )
 }
