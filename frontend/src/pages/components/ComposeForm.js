@@ -10,20 +10,24 @@ const ComposeForm = ({name}) => {
 
     let handleSubmit=async ()=>{
         
-        let data={
-            "sender":name,
-            "recipient":to.current.value,
-            "subject":subject.current.value,
-            "body":body.current.value
-        }
-        let response=await POST('compose/',data)
-        if (response['status']){
-            alert("Mail Sent")
-            window.location.href="../sent/"
-        
+        if (to.current.value!=="" && subject.current.value!=="" && body.current.value!==""){
+            let data={
+                "sender":name,
+                "recipient":to.current.value+'@awesome.com',
+                "subject":subject.current.value,
+                "body":body.current.value
+            }
+            let response=await POST('compose/',data)
+            if (response['status']){
+                alert(response['message'])
+                window.location.href="../sent/"
+            }
+            else{
+                alert(response['message'])
+            }
         }
         else{
-            alert("Mail not sent")
+            alert("Please fill all fields")
         }
         
         

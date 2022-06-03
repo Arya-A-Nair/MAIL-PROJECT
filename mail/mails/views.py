@@ -51,10 +51,14 @@ def sent(request):
 
 @api_view(['POST'])
 def compose(request):
-    serializer=MailSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-    return Response({"status":True})
+    check=Users.objects.filter(name=request.data['recipient']).exists()
+    if check==True:
+        serializer=MailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({"status":True,"message":"Mail sent successfully"})
+    else:
+        return Response({"status":False,"message":"Recipient does not exist"})
 
 @api_view(['POST'])
 def archive(request):
