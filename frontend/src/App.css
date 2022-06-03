@@ -74,6 +74,9 @@ h3{
 }
 .mail .content{
   font-weight: 500;
+  resize: none;
+  width: 90% !important;
+  height: 30vh;
 }
 
 .mail-container{

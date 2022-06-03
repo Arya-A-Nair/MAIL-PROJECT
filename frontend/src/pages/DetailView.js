@@ -65,8 +65,8 @@ const DetailView = () => {
                     <p><b>From</b>: {mail.sender} <b>on</b> {date}</p>
                     <p><b>To:</b> {mail.recipient}</p>
                     <br/>
-                    <p className='content'>{mail.body}</p>
-        
+                    <textarea className='content' value={mail.body} disabled></textarea>
+                    <br/>
                     <span>
                     {mail.archived===false?<button className='button-archive' onClick={()=>HandleArchive()}>Archive</button>:<button className='button-archive' onClick={()=>HandleUnArchive()}>Unarchive</button>} 
                     

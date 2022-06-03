@@ -12,8 +12,7 @@ const ComposeFormReply = () => {
     if( subject.slice(0,4)!=='Re: '){
         subject='Re: '+subject
     }
-
-    const [body,setBody]=useState(intro+localStorage.getItem('body')+"\n\n")
+    const [body,setBody]=useState("\n"+intro+localStorage.getItem('body')+"\n\nReply("+name+"): ")
     
     
 
